@@ -1,6 +1,6 @@
 {
   "name": "@vivekkv178/library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -23,9 +23,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@iconify/react": "^4.1.1",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "framer-motion": "^11.0.5",
     "lucide-react": "^0.330.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

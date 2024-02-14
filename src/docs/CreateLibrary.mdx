@@ -2,6 +2,325 @@ import { Meta } from "@storybook/blocks";
 
 <Meta title="Getting Started/Create Library" />
 
+# Setting Up a React TypeScript Component Library with Vite, Tailwind CSS, Shahdcn, GitHub Actions, Storybook, and Chromatic
+
+This guide will walk you through the process of setting up a React TypeScript component library with Vite, Tailwind CSS, Shahdcn, GitHub Actions, Storybook, and Chromatic.
+
+### Step 1: Creating a React TypeScript project using Vite
+
+```bash
+npm create vite@latest library -- --template react-ts
+cd library
+```
+
+### Step 2: Installing Tailwind CSS and its dependencies
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+```
+
+### Step 3: Initializing Tailwind CSS configuration
+
+```bash
+npx tailwindcss init -p
+```
+
+### Step 4: Updating `tailwind.config.js` with content configuration
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### Step 5: Adding Tailwind CSS to `index.css`
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Step 6: Deleting unwanted files and folders
+
+- Delete files: `assets`, `app.tsx`, `app.css`, `main.ts`
+
+### Step 7: Creating `index.ts` file in `src` directory
+
+```bash
+touch src/index.ts
+```
+
+### Step 8: Updating `tsconfig.json` with path aliases
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+    // ...
+  }
+}
+```
+
+### Step 9: Initializing `shadcn-ui` library
+
+```bash
+npx shadcn-ui@latest init
+```
+
+Upon running the command, the user will be prompted with these questions, and they should respond accordingly to configure the `shadcn-ui` library. Once the configuration is confirmed, the initialization process will proceed.
+
+### Configuration Prompt and Response:
+
+```
+√ Would you like to use TypeScript (recommended)? ... yes
+√ Which style would you like to use? » Default
+√ Which color would you like to use as base color? » Slate
+√ Where is your global CSS file? ... src/index.css
+√ Would you like to use CSS variables for colors? ... no
+√ Are you using a custom tailwind prefix eg. tw-? (Leave blank if not) ...
+√ Where is your tailwind.config.js located? ... tailwind.config.js
+√ Configure the import alias for components: ... @/components
+√ Configure the import alias for utils: ... @/lib/utils
+√ Are you using React Server Components? ... no
+√ Write configuration to components.json. Proceed? ... yes
+```
+
+### Step 10: Renaming `button.tsx` to `Button.tsx`
+
+```bash
+mv src/components/ui/button.tsx src/components/ui/Button.tsx
+```
+
+### Step 11: Exporting components from `index.ts`
+
+```typescript
+export {
+  Button,
+  buttonVariants,
+  type ButtonProps,
+} from "./components/ui/Button";
+```
+
+### Step 12: Updating `tailwind.config.js` with safelist configuration
+
+```javascript
+content: ["./src/**/*.{js,ts,jsx,tsx}"],
+safelist: ['dark'],
+```
+
+### Step 13: Installing PostCSS CLI
+
+```bash
+npm i -D postcss-cli
+```
+
+### Step 14: Adding a build script for styles in `package.json`
+
+```json
+"build:styles": "postcss ./src/index.css -o ./dist/style.css"
+```
+
+### Step 15: Adding a build script for library in `package.json`
+
+```json
+"build:lib": "npm run build && npm run build:styles"
+```
+
+### Step 16: Installing `vite-plugin-dts`
+
+```bash
+npm install -D vite-plugin-dts
+```
+
+### Step 17: Updating `vite.config.ts` with Vite configuration
+
+```typescript
+import { defineConfig } from "vite";
+import { resolve } from "path";
+import { peerDependencies, dependencies } from "./package.json";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
+
+export default defineConfig({
+  plugins: [
+    react({
+      jsxRuntime: "classic",
+    }),
+    dts({
+      include: ["src/**/*"],
+    }),
+  ],
+  build: {
+    lib: {
+      entry: resolve(__dirname, "src", "index.ts"),
+      formats: ["es", "cjs"],
+      fileName: (ext) => `index.${ext}.js`,
+    },
+    rollupOptions: {
+      external: [
+        ...Object.keys(peerDependencies),
+        ...Object.keys(dependencies),
+      ],
+      output: { preserveModules: true, exports: "named" },
+    },
+
+    target: "esnext",
+    sourcemap: true,
+  },
+  resolve: { alias: [{ find: "@", replacement: resolve("./src") }] },
+});
+```
+
+### Step 18: Updating `package.json` with package configuration
+
+```json
+{
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": ["dist"]
+}
+```
+
+### Step 19: Adding `publishConfig` to `package.json`
+
+```json
+"publishConfig": {
+  "registry": "https://npm.pkg.github.com/@vivekkv178"
+}
+```
+
+### Step 20: Adding GitHub Actions workflow
+
+Create a YAML file (e.g., `main.yml`) inside the `.github/workflows/` directory with the following content:
+
+```yaml
+name: NPM Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-gpr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+          scope: "@vivekkv178"
+      - run: npm ci
+      - run: npm run build:lib
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_PACKAGE_DEPLOYMENT_TOKEN}}
+```
+
+### Step 21: Adding GitHub token to repository secrets
+
+Create a new repository secret named `GH_PACKAGE_DEPLOYMENT_TOKEN` and add the generated token associated with your GitHub account.
+
+### Step 22: Initialize Storybook
+
+```bash
+npx sb init
+```
+
+### Step 23: Delete the stories folder
+
+```bash
+rm -rf stories
+```
+
+### Step 24: Import `index.css` into `.storybook/preview.ts`
+
+```typescript
+import "../src/index.css";
+```
+
+### Step 25: Create a `Button.stories.tsx` file
+
+```bash
+cd src/components/ui/Button
+touch Button.stories.tsx
+```
+
+### Step 26: Add Storybook stories for the `Button` component
+
+Add the following code to `Button.stories.tsx` to define stories for the `Button` component:
+
+```typescript
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { Button } from "./Button";
+
+const meta: Meta<typeof Button> = {
+  title: "UI-Components/Button",
+  component: Button,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
+    layout: "centered",
+  },
+  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
+  tags: ["autodocs"],
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  argTypes: {},
+};
+
+export default meta;
+type Story = StoryObj<typeof Button>;
+
+/*
+ *👇 Render functions are a framework specific feature to allow you control on how the component renders.
+ * See https://storybook.js.org/docs/api/csf
+ * to learn how to use render functions.
+ */
+export const Primary: Story = {
+  args: {
+    variant: "destructive",
+    size: "sm",
+    children: "Delete",
+  },
+};
+```
+
+### Step 27: Create
+
+a `docs` folder and add `GettingStarted.mdx`
+
+```bash
+mkdir src/docs
+touch src/docs/GettingStarted.mdx
+```
+
+### Step 28: Populate `GettingStarted.mdx` with documentation content
+
+Add the following content to `GettingStarted.mdx`:
+
+````
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Getting Started/Create Library" />
+
 # Setting Up a React TypeScript Component Library with Vite, Tailwind CSS, and GitHub Actions
 
 ## Step 1: Creating a React TypeScript project using Vite
@@ -9,4 +328,63 @@ import { Meta } from "@storybook/blocks";
 ```bash
 npm create vite@latest dev-library -- --template react-ts
 cd dev-library
+````
+
+### Step 29: Create `chromatic.yml` file
+
+Create a YAML file named `chromatic.yml` in the `.github/workflows/` directory with the following content:
+
+```yaml
+name: Chromatic
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: yarn
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 ```
+
+### Step 30: Generate Chromatic token and add it to repository secrets
+
+1. Log in to Chromatic and create a new project.
+2. Copy the project token associated with the newly created project.
+3. Navigate to your GitHub repository settings.
+4. Go to Secrets and add a new repository secret named `CHROMATIC_PROJECT_TOKEN` with the copied token.
+
+### Step 31: Push the code
+
+1. Push the code to the repo.
+2. This should start the deployment.
+3. Once deployed you will see a package.
+4. Chromatic may fail the first time. you can re-run the job and check.
+
+### Conclusion
+
+Congratulations! You have successfully set up a React TypeScript component library with Vite, Tailwind CSS, Shahdcn, GitHub Actions, Storybook, and Chromatic. This comprehensive guide has provided detailed instructions for each step, ensuring a smooth setup process for your project. Happy coding!
+
+### References to Documentation
+
+#### 1. **Let's Build a Component Library Using Shadcn's UI Components**
+
+- Video Title: [Let's Build a Component Library Using Shadcn's UI Components](https://www.youtube.com/watch?v=ChjoKSNWiBo)
+  [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ChjoKSNWiBo/0.jpg)](https://www.youtube.com/watch?v=ChjoKSNWiBo)
+
+#### 2. **Private NPM Packages using GitHub Actions & Packages**
+
+- Video Title: [Private NPM Packages using GitHub Actions & Packages](https://www.youtube.com/watch?v=7CNC0QBCY-Y)
+  [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/7CNC0QBCY-Y/0.jpg)](https://www.youtube.com/watch?v=7CNC0QBCY-Y)
