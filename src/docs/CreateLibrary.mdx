@@ -373,6 +373,56 @@ jobs:
 3. Once deployed you will see a package.
 4. Chromatic may fail the first time. you can re-run the job and check.
 
+### Step 32: Configuring npm for Private Component Installation
+
+1. Create an `.npmrc` file in your project directory if you haven't already.
+
+2. Add the following line to your `.npmrc` file:
+
+   ```
+   registry=https://registry.npmjs.org/
+   @vivekkv178:registry=https://npm.pkg.github.com/
+   //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+   ```
+
+   Replace `YOUR_GITHUB_TOKEN` with your GitHub personal access token. Make sure your token has the appropriate permissions (read:packages) to access the private repository.
+
+3. Run the following command to install your private component:
+
+   ```bash
+   npm install @github_username/private_component_name
+   ```
+
+   Replace `@github_username/private_component_name` with the actual scope and name of your private component on GitHub.
+
+By configuring npm with your GitHub personal access token in the `.npmrc` file, npm will use the token for authentication when fetching packages from GitHub's package registry. This allows you to install and use private components in your project seamlessly. Make sure to keep your access token secure and avoid sharing it publicly.
+
+To set up the `.npmrc` configuration in Vercel using environment variables, you can indeed utilize the `NPM_RC` environment variable to provide the content of your `.npmrc` file. Here's how you can do it:
+
+### Step 24: Setting Up `.npmrc` Using Environment Variables in Vercel
+
+1. Navigate to your Vercel project dashboard to access your project.
+
+2. Go to the project settings or environment variables section.
+
+3. Add a new environment variable named `NPM_RC`.
+
+4. Paste the content of your `.npmrc` file into the value field of the `NPM_RC` environment variable. Ensure the content follows the correct format:
+
+   ```
+   registry=https://registry.npmjs.org/
+   @vivekkv178:registry=https://npm.pkg.github.com/
+   //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+   ```
+
+   Replace `YOUR_GITHUB_TOKEN` with your GitHub personal access token.
+
+5. Save the environment variable.
+
+6. Make sure to reference the `NPM_RC` environment variable in your Vercel environment so that it is accessible during the build and deployment process.
+
+By setting up the `.npmrc` configuration using environment variables in Vercel, you can securely manage your authentication token and seamlessly authenticate with the GitHub package registry to install private components during the build process.
+
 ### Conclusion
 
 Congratulations! You have successfully set up a React TypeScript component library with Vite, Tailwind CSS, Shahdcn, GitHub Actions, Storybook, and Chromatic. This comprehensive guide has provided detailed instructions for each step, ensuring a smooth setup process for your project. Happy coding!
