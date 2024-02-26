@@ -21,7 +21,11 @@ const ReviewCard = (props: ReviewCardProps) => {
       <CardHeader className="p-0 mb-10">
         <div className="flex items-center gap-x-4">
           {/* image */}
-          <img src={avatar} width={70} height={70} alt="" />
+          <img
+            src={avatar}
+            className="w-[4.5rem] h-[4.5rem] rounded-full"
+            alt=""
+          />
           {/* name */}
           <div className="flex flex-col">
             <CardTitle>{name}</CardTitle>
