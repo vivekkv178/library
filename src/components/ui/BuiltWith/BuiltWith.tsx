@@ -9,8 +9,9 @@ import { Button } from "../Button/Button";
 import { Icon } from "@iconify/react";
 
 type Technology = {
-  icon: string;
-  name: string;
+  icon?: string;
+  name?: string;
+  iconOverride?: string;
 };
 
 export type BuiltWithProps = {
@@ -34,7 +35,10 @@ const BuiltWith = (props: BuiltWithProps) => {
               <div key={index} className="mr-1 mt-1">
                 <Tooltip>
                   <TooltipTrigger>
-                    <Icon icon={tech.icon} className="w-6 h-6" />
+                    <Icon
+                      icon={tech.icon || tech.iconOverride!}
+                      className="w-6 h-6"
+                    />
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{tech.name}</p>

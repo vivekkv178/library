@@ -56,7 +56,12 @@ const Hero = (props: HeroProps) => {
                   rel={primaryButton?.newTab ? "noopener noreferrer" : ""}
                 >
                   <Button className="gap-x-2">
-                    {primaryButton.label} <Send size={18} />
+                    {primaryButton.label}
+                    {secondaryButton?.icon ? (
+                      secondaryButton?.icon
+                    ) : (
+                      <Send size={18} />
+                    )}
                   </Button>
                 </NavigationComponent>
               ) : null}
@@ -68,7 +73,11 @@ const Hero = (props: HeroProps) => {
                 >
                   <Button variant="secondary" className="gap-x-2">
                     {secondaryButton.label}
-                    <Download size={18} />
+                    {secondaryButton?.icon ? (
+                      secondaryButton?.icon
+                    ) : (
+                      <Download size={18} />
+                    )}
                   </Button>
                 </NavigationComponent>
               ) : null}

@@ -10,7 +10,7 @@ export { default as MarketingLayout } from "./components/ui/MarketingLayout/Mark
 
 export { default as MarketingHeader } from "./components/ui/MarketingHeader2/MarketingHeader";
 
-export { Theme } from "@/lib/constants";
+export { Theme, Icons } from "@/lib/constants";
 
 export { default as Hero } from "./components/ui/Hero/Hero";
 
