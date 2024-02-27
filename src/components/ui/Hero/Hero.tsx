@@ -57,8 +57,8 @@ const Hero = (props: HeroProps) => {
                 >
                   <Button className="gap-x-2">
                     {primaryButton.label}
-                    {secondaryButton?.icon ? (
-                      secondaryButton?.icon
+                    {primaryButton?.icon ? (
+                      primaryButton?.icon
                     ) : (
                       <Send size={18} />
                     )}
