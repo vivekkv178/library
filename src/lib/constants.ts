@@ -15,4 +15,4 @@ export enum Icons {
 }
 
 export const logoUrl =
-  "https://static.vecteezy.com/system/resources/previews/010/366/210/original/bell-icon-transparent-notification-free-png.png";
+  "https://raw.githubusercontent.com/vivekkv178/cdn/main/portfolio/logo.png";
