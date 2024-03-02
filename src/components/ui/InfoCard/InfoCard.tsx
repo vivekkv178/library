@@ -52,9 +52,7 @@ const InfoCard = (props: InfoCardProps) => {
         </div>
       </CardHeader>
       <div className="h-full px-8 py-6">
-        <Badge className="uppercase text-sm font-medium mb-2 absolute top-4 left-5">
-          {category}
-        </Badge>
+        <Badge className="uppercase text-sm font-medium mb-2">{category}</Badge>
         <h4 className="h4 mb-1">{name}</h4>
         <p className="text-muted-foreground text-lg">{description}</p>
       </div>
