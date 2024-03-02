@@ -53,3 +53,5 @@ export { default as ReviewCard } from "./components/ui/ReviewCard/ReviewCard";
 export { default as Footer } from "./components/ui/Footer/Footer";
 
 export { default as BuiltWith } from "./components/ui/BuiltWith/BuiltWith";
+
+export { default as CustomTooltip } from "./components/ui/Tooltip/CustomTooltip";
