@@ -38,8 +38,8 @@ const Socials = (props: SocialsProps) => {
             <div
               className={
                 footer
-                  ? "text-primary dark:text-white/70 text-[20px] hover:text-white dark:hover:text-primary transition-all"
-                  : `text-foreground text-[22px] hover:text-primary transition-all`
+                  ? "text-primary dark:text-white/70 text-4xl hover:text-white dark:hover:text-primary transition-all"
+                  : `text-foreground text-4xl hover:text-primary transition-all`
               }
             >
               <Icon icon={SocialIcons[social as keyof typeof SocialIcons]} />

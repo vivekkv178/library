@@ -11,6 +11,7 @@ export type InfoCardProps = {
   category: string;
   name: string;
   description: string;
+  newTab?: boolean;
 };
 
 const InfoCard = (props: InfoCardProps) => {
@@ -22,6 +23,7 @@ const InfoCard = (props: InfoCardProps) => {
     category,
     name,
     description,
+    newTab,
   } = props;
 
   return (
@@ -38,12 +40,16 @@ const InfoCard = (props: InfoCardProps) => {
           <div className="flex gap-x-4">
             <NavigationComponent
               href={link}
+              target={newTab ? "_blank" : ""}
+              rel={newTab ? "noopener noreferrer" : ""}
               className="bg-secondary w-[54px] h-[54px] rounded-full flex justify-center items-center scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200"
             >
               <Link2Icon className="text-white" />
             </NavigationComponent>
             <NavigationComponent
               href={github}
+              target={newTab ? "_blank" : ""}
+              rel={newTab ? "noopener noreferrer" : ""}
               className="bg-secondary w-[54px] h-[54px] rounded-full flex justify-center items-center scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300"
             >
               <Github className="text-white" />
