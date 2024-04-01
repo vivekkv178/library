@@ -46,7 +46,7 @@ export default function SignUp() {
           type="submit"
           variant="default"
           className="w-full"
-          onClick={handleSignUp}
+          // onClick={handleSignUp}
         >
           {loading ? (
             <Icon

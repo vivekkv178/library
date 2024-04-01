@@ -31,8 +31,8 @@ export default function Forgot() {
           />
         </div>
         <Button
-          type="submit"
-          variant="default"
+          // type="submit"
+          // variant="default"
           className="w-full"
           onClick={handleForgotPassword}
         >

@@ -34,8 +34,8 @@ const Reset = () => {
         </div>
         <Button
           type="submit"
-          variant="default"
-          className="w-full"
+          // variant="default"
+          // className="w-full"
           onClick={handleEmailSignIn}
         >
           {loading ? (
