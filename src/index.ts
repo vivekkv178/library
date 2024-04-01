@@ -4,7 +4,7 @@ export {
   type ButtonProps,
 } from "./components/ui/Button/Button";
 
-export { default as AppLayout } from "./components/ui/AppLayout/AppLayout";
+export { default as AppLayout } from "./components/ui/AppLayout2/AppLayout";
 
 export { default as MarketingLayout } from "./components/ui/MarketingLayout/MarketingLayout";
 
@@ -55,3 +55,7 @@ export { default as Footer } from "./components/ui/Footer/Footer";
 export { default as BuiltWith } from "./components/ui/BuiltWith/BuiltWith";
 
 export { default as CustomTooltip } from "./components/ui/Tooltip/CustomTooltip";
+
+export { default as LoginPage } from "./components/pages/Login/LoginPage";
+
+export { getUserInfo, logout } from "./components/functions/firebaseUtils";

@@ -31,4 +31,7 @@ export default defineConfig({
     sourcemap: true,
   },
   resolve: { alias: [{ find: "@", replacement: resolve("./src") }] },
+  define: {
+    "process.env": process.env,
+  },
 });

@@ -44,5 +44,11 @@ export const Primary: Story = {
       logoUrl: logoUrl,
       NavigationComponent: MockNextLink,
     },
+    loginProps: {
+      NavigationComponent: MockNextLink,
+      loginRedirect: "/",
+      loggedIn: false,
+      userImage: "",
+    },
   },
 };

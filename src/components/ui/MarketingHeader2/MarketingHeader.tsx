@@ -3,16 +3,18 @@ import ThemeToggler, { ThemeTogglerProps } from "../ThemeToggler/ThemeToggler";
 import Navbar, { NavbarProps } from "../Navbar/Navbar";
 import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import Logo, { LogoProps } from "../Logo/Logo";
+import Login, { LoginProps } from "../Login/Login";
 
 export type MarketingHeaderProps = {
   themeProps: ThemeTogglerProps;
   navbarProps: NavbarProps;
   // mobileNavProps: MobileNavbarProps;
   logoProps: LogoProps;
+  loginProps?: LoginProps;
 };
 
 const MarketingHeader = (props: MarketingHeaderProps) => {
-  const { themeProps, navbarProps, logoProps } = props;
+  const { themeProps, navbarProps, logoProps, loginProps } = props;
 
   const [header, setHeader] = useState(false);
   const pathname = "/";
@@ -40,6 +42,7 @@ const MarketingHeader = (props: MarketingHeaderProps) => {
           <Logo {...logoProps} />
           <div className="flex items-center gap-x-6">
             <Navbar {...navbarProps} />
+            {loginProps ? <Login {...loginProps} /> : null}
             <ThemeToggler {...themeProps} />
             <div className="xl:hidden">
               <MobileNavbar
