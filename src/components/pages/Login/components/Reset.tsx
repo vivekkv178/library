@@ -32,7 +32,12 @@ const Reset = () => {
             onChange={handleChange}
           />
         </div>
-        <Button type="submit" className="w-full" onClick={handleEmailSignIn}>
+        <Button
+          type="submit"
+          variant="default"
+          className="w-full"
+          onClick={handleEmailSignIn}
+        >
           {loading ? (
             <Icon
               icon="lucide:loader-circle"

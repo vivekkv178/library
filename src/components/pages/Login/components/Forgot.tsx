@@ -30,7 +30,12 @@ export default function Forgot() {
             onChange={handleChange}
           />
         </div>
-        <Button type="submit" className="w-full" onClick={handleForgotPassword}>
+        <Button
+          type="submit"
+          variant="default"
+          className="w-full"
+          onClick={handleForgotPassword}
+        >
           {loading ? (
             <Icon
               icon="lucide:loader-circle"
