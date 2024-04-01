@@ -28,7 +28,15 @@ type Story = StoryObj<typeof AppLayout>;
  */
 export const Primary: Story = {
   args: {
-    children: <h1>Contents</h1>,
+    children: (
+      <>
+        {Array(20)
+          .fill(0)
+          .map(() => (
+            <h1>Contents</h1>
+          ))}
+      </>
+    ),
     NavigationComponent: MockNextLink,
     profileProps: {
       name: "Test",
