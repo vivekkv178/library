@@ -42,12 +42,7 @@ export default function SignUp() {
             onChange={handleChange}
           />
         </div>
-        <Button
-          type="submit"
-          variant="default"
-          className="w-full"
-          // onClick={handleSignUp}
-        >
+        <Button className="w-full" onClick={handleSignUp}>
           {loading ? (
             <Icon
               icon="lucide:loader-circle"
