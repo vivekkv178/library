@@ -1,6 +1,6 @@
 {
   "name": "@vivekkv178/library",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -73,9 +73,9 @@
     "vite-plugin-dts": "^3.7.2"
   },
   "peerDependencies": {
+    "@reduxjs/toolkit": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@reduxjs/toolkit": "^2.2.3",
     "react-redux": "^9.1.0"
   }
 }

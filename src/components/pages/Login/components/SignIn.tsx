@@ -56,14 +56,8 @@ const SignIn = () => {
           className="w-full"
           onClick={handleEmailSignIn}
         >
-          {loading ? (
-            <Icon
-              icon="lucide:loader-circle"
-              className="h-6 w-6 animate-spin"
-            />
-          ) : (
-            "Login"
-          )}
+          <Icon icon="lucide:mail" className="h-4 w-4 mr-2" />
+          Login with Email
         </Button>
         <Button variant="outline" className="w-full" onClick={handleSignIn}>
           <Icon icon="logos:google-icon" className="h-4 w-4 mr-2" />
