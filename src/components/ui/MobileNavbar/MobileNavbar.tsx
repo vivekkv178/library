@@ -10,7 +10,7 @@ import Login, { LoginProps } from "../Login/Login";
 export type MobileNavbarProps = {
   navbarProps: NavbarProps;
   logoProps: LogoProps;
-  loginProps: LoginProps;
+  loginProps?: LoginProps;
 };
 
 const MobileNavbar = (props: MobileNavbarProps) => {
@@ -26,7 +26,7 @@ const MobileNavbar = (props: MobileNavbarProps) => {
           <div className="flex flex-col items-center gap-y-32">
             <Logo {...logoProps} />
             <Navbar {...navbarProps} mobileView />
-            <Login {...loginProps} mobileView />
+            {loginProps && <Login {...loginProps} mobileView />}
           </div>
           {/* <Socials containerStyles="flex gap-x-4" iconsStyles="text-2xl" /> */}
         </div>

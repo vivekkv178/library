@@ -10,7 +10,7 @@ export type MarketingHeaderProps = {
   navbarProps: NavbarProps;
   // mobileNavProps: MobileNavbarProps;
   logoProps: LogoProps;
-  loginProps: LoginProps;
+  loginProps?: LoginProps;
 };
 
 const MarketingHeader = (props: MarketingHeaderProps) => {
