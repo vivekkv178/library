@@ -5,15 +5,16 @@ import { Sheet, SheetContent, SheetTrigger } from "../Sheet/Sheet";
 import { AlignJustify } from "lucide-react";
 import Navbar, { NavbarProps } from "../Navbar/Navbar";
 import Logo, { LogoProps } from "../Logo/Logo";
-import Login from "../Login/Login";
+import Login, { LoginProps } from "../Login/Login";
 
 export type MobileNavbarProps = {
   navbarProps: NavbarProps;
   logoProps: LogoProps;
+  loginProps: LoginProps;
 };
 
 const MobileNavbar = (props: MobileNavbarProps) => {
-  const { navbarProps, logoProps } = props;
+  const { navbarProps, logoProps, loginProps } = props;
 
   return (
     <Sheet>
@@ -25,13 +26,7 @@ const MobileNavbar = (props: MobileNavbarProps) => {
           <div className="flex flex-col items-center gap-y-32">
             <Logo {...logoProps} />
             <Navbar {...navbarProps} mobileView />
-            <Login
-              NavigationComponent={navbarProps.NavigationComponent}
-              loginRedirect="/"
-              mobileView
-              loggedIn={false}
-              userImage=""
-            />
+            <Login {...loginProps} mobileView />
           </div>
           {/* <Socials containerStyles="flex gap-x-4" iconsStyles="text-2xl" /> */}
         </div>

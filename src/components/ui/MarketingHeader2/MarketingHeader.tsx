@@ -10,7 +10,7 @@ export type MarketingHeaderProps = {
   navbarProps: NavbarProps;
   // mobileNavProps: MobileNavbarProps;
   logoProps: LogoProps;
-  loginProps?: LoginProps;
+  loginProps: LoginProps;
 };
 
 const MarketingHeader = (props: MarketingHeaderProps) => {
@@ -46,7 +46,7 @@ const MarketingHeader = (props: MarketingHeaderProps) => {
             <ThemeToggler {...themeProps} />
             <div className="xl:hidden">
               <MobileNavbar
-                // {...mobileNavProps}
+                loginProps={loginProps}
                 navbarProps={navbarProps}
                 logoProps={logoProps}
               />

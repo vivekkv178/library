@@ -30,6 +30,16 @@ export const Primary: Story = {
       { path: "/", name: "home" },
       { path: "/projects", name: "my projects" },
       { path: "/contact", name: "contact" },
+      {
+        path: "/contact",
+        name: "More",
+        nested: true,
+        subRoutes: [
+          { path: "/", name: "home" },
+          { path: "/projects", name: "my projects" },
+          { path: "/contact", name: "contact" },
+        ],
+      },
     ],
     NavigationComponent: MockNextLink,
     currentPath: "/",
