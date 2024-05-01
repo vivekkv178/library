@@ -8,10 +8,11 @@ const Navbar = (props: AppLayoutProps) => {
 
   return (
     <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-      {navbarProps.navs.map((nav) => (
+      {navbarProps.navs.map((nav, index) => (
         <NavigationComponent
           href={nav.path}
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          key={index}
         >
           <Icon icon={nav.icon} className="h-4 w-4" />
           {nav.title}

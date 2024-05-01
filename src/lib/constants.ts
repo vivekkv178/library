@@ -6,6 +6,12 @@ export enum Theme {
 export enum Icons {
   react = "logos:react",
   next = "logos:nextjs-icon",
+  node = "logos:nodejs-icon",
+  pg = "logos:postgresql",
+  docker = "logos:docker-icon",
+  kubernetes = "logos:kubernetes",
+  aws = "logos:aws",
+  nest = "logos:nestjs",
   tailwind = "logos:tailwindcss-icon",
   ts = "logos:typescript-icon",
   js = "logos:javascript",
