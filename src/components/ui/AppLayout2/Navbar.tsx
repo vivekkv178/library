@@ -16,11 +16,11 @@ const Navbar = (props: AppLayoutProps) => {
         >
           <Icon icon={nav.icon} className="h-4 w-4" />
           {nav.title}
-          {nav.badge && (
+          {nav.badge ? (
             <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
               {nav.badge}
             </Badge>
-          )}
+          ) : null}
         </NavigationComponent>
       ))}
     </nav>

@@ -57,6 +57,7 @@ export const Primary: Story = {
           path: "#",
           icon: "lucide:bell",
           customClick: true,
+          badge: 2,
         },
       ],
     },
